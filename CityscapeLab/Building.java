@@ -1,31 +1,67 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
-import java.awt.Color;
+
+
+
+
+/**
+ * creates a building with window 
+ * 
+ * @author (Andrew Apicella)
+ * @version (10 October 2014)
+ */
 public class Building
 {
+    /**number of levels the building has*/
+    private int levels;
     private int xLeft;
     private int yTop;
-    public void building(int x, int y)
+
+    /**
+     * Constructor for objects of class Building
+     * 
+     * @param x x-Coordinate
+     * 
+     * @param y y-Coordinate
+     * 
+     * @param levels The number of thevels the building will have
+     */
+    public Building(int x, int y, int lvls)
     {
-     xLeft = x;
-     yTop = y;
-    }
-    public static void draw(Graphics g)
-    {    
-        Rectangle body = new Rectangle(int xLeft, int yTop, 100, 400);
-        Rectangle window1 = new Ractangle(xLeft+20, yTop+15, 50, 70);
-        Rectangle window2 = new Rectangle(xLext+20, yTop+115,50,70);
-        Rectangle window3 = new Rectangle(xLeft+20, yTop+215,50,70);
-        Rectangle window4 = new Rectangle(xLeft+20, yTop+315,50,70);
-        g2.draw(window1);
-        g2.fill(window1);
-        g2.draw(window2);
-        g2.draw(window3);
-        g2.draw(window4);
+        xLeft = x;
+        yTop = y;
+        levels = lvls;
         
     }
 
+    /**
+     * Draws the building
+     * 
+     * @param  g2   graphics contex
+     */
+    public void draw(Graphics2D g2)
+    {
+      /**creates one building level*/
+      Rectangle body = new Rectangle(xLeft/*X*/, yTop/*Y*/, 100/*Width*/, 100/*Height*/);
+      /**creates window inside of building level*/
+      Rectangle window = new Rectangle(xLeft+25, yTop+25, 50, 50);
+      g2.setColor(Color.DARK_GRAY);
+      g2.fill(body);
+      g2.setColor(Color.ORANGE);
+      g2.fill(window); 
+      
+      /**Creates (levels) number of levels*/
+      for(int i = 1; i<=levels; i++)
+      {
+         /**Adds 100 to y value of body*/
+         body.setLocation(xLeft, yTop-(100*i));
+         g2.setColor(Color.DARK_GRAY);
+         g2.fill(body);
+         window.setLocation(xLeft+25, yTop-(100*i)+25);
+         g2.setColor(Color.ORANGE);
+         g2.fill(window);   
+        }
+    }
 }
